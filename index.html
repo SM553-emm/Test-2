@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smiley Chat 💬</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e5ddd5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-window {
+      width: 400px;
+      height: 600px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .header {
+      background-color: #075e54;
+      color: #fff;
+      padding: 15px;
+      font-weight: bold;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 10px;
+      background-color: #dcf8c6;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin: 10px 0;
+      max-width: 70%;
+      padding: 10px 15px;
+      border-radius: 15px;
+      clear: both;
+      line-height: 1.4;
+    }
+
+    .from-user {
+      background-color: #34b7f1;
+      color: white;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .from-them {
+      background-color: #fff;
+      color: black;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .input-area button {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-left: 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .input-area button:hover {
+      background-color: #1ebe58;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chat-window">
+    <div class="header">Smiley 💬</div>
+    <div class="messages" id="chat">
+      <div class="message from-user">Hey</div>
+      <div class="message from-them">Hi, how can I help?</div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="messageInput" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+      const chat = document.getElementById('chat');
+
+      if (message) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'message from-user';
+        msgDiv.textContent = message;
+        chat.appendChild(msgDiv);
+
+        // Optional: Auto reply (simulate bot)
+        setTimeout(() => {
+          const reply = document.createElement('div');
+          reply.className = 'message from-them';
+          reply.textContent = "Received: " + message;
+          chat.appendChild(reply);
+          chat.scrollTop = chat.scrollHeight;
+        }, 500);
+      }
+
+      input.value = '';
+      input.focus();
+      chat.scrollTop = chat.scrollHeight;
+    }
+  </script>
+
+</body>
+</html>
